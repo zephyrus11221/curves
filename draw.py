@@ -17,7 +17,29 @@ def add_circle( points, cx, cy, cz, r, step ):
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     if curve_type == 'hermite':
-        
+        m = make_hermite()
+    elif curve_type == 'bezier':
+        m = make_bezier()
+    x = generate_curve_coefs(x0, x1, x2, x3, m)
+    y = generate_curve_coefs(y0, y1, y2, y3, m)
+    ax = x[0][0]
+    bx = x[0][1]
+    cx = x[0][2]
+    dx = x[0][3]
+    ay = y[0][0]
+    by = y[0][1]
+    cy = y[0][2]
+    dy = y[0][3]
+    px = x0
+    py = y0
+    t = 0
+    while(t<1.00001):
+        px0 = ax*(t**3) + (bx*t*t) + (cx*t) + dx
+        py0 = ay*(t**3) + (by*t*t) + (cy*t) + dy
+        add_edge(points, px, py, 0, x1, y1, 0)
+        t+=step
+        px = px0
+        py = py0
     pass
 
 

@@ -38,18 +38,16 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
-ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save' ]
+ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save', 'bezier', 'hermite' ]
 
 def parse_file( fname, edges, transform, screen, color ):
 
     f = open(fname)
     lines = f.readlines()
-
     c = 0
     while c < len(lines):
         line = lines[c].strip()
         #print ':' + line + ':'
-
         if line in ARG_COMMANDS:
             c+= 1
             args = lines[c].strip().split(' ')
@@ -97,5 +95,20 @@ def parse_file( fname, edges, transform, screen, color ):
                 display(screen)
             else:
                 save_extension(screen, args[0])
-            
+        elif line == 'hermite':            
+            add_curve( edges,
+                      float(args[0]), float(args[1]),
+                      float(args[2]), float(args[3]),
+                      float(args[4]), float(args[5]),
+                      float(args[6]), float(args[7]),
+                      .002,
+                      'hermite' )
+        elif line == 'bezier':            
+            add_curve( edges,
+                      float(args[0]), float(args[1]),
+                      float(args[2]), float(args[3]),
+                      float(args[4]), float(args[5]),
+                      float(args[6]), float(args[7]),
+                      .002,
+                      'bezier' )
         c+= 1
