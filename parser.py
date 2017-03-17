@@ -38,7 +38,7 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
-ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save', 'bezier', 'hermite' ]
+ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save', 'bezier', 'hermite', 'circle' ]
 
 def parse_file( fname, edges, transform, screen, color ):
 
@@ -111,4 +111,10 @@ def parse_file( fname, edges, transform, screen, color ):
                       float(args[6]), float(args[7]),
                       .002,
                       'bezier' )
+        elif line == 'circle':
+            add_circle( edges,
+                       float(args[0]), float(args[1]),
+                       float(args[2]), float(args[3]),
+                       .002)
         c+= 1
+    pass

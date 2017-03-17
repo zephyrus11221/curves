@@ -7,8 +7,8 @@ def add_circle( points, cx, cy, cz, r, step ):
     x = cx+r
     y = cy
     while(t<1.00001):
-        x1 = r*cos(2*math.pi*t)+cx
-        y1 = r*cos(2*math.pi*t)+cy
+        x1 = r*math.cos(2*math.pi*t)+cx
+        y1 = r*math.sin(2*math.pi*t)+cy
         add_edge(points, x, y, cz, x1, y1, cz)
         t+=step
         x = x1
@@ -36,13 +36,11 @@ def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     while(t<1.00001):
         px0 = ax*(t**3) + (bx*t*t) + (cx*t) + dx
         py0 = ay*(t**3) + (by*t*t) + (cy*t) + dy
-        add_edge(points, px, py, 0, x1, y1, 0)
+        add_edge(points, px, py, 0, px0, py0, 0)
         t+=step
         px = px0
         py = py0
     pass
-
-
 
 def draw_lines( matrix, screen, color ):
     if len(matrix) < 2:
