@@ -61,16 +61,16 @@ for i in range(51):
               250+i*5, 500,
               250-i*5, 0,
               250-i*5, 0,
-              .002, 'bezier')
-    
-
+              .002, 'bezier')    
     
     color = [20, 150-i*3, 100]
     draw_lines(edges, screen, color)
-    color = [20+i*3, 0, 100]
+    color = [20+i, 0+i, 100]
     draw_lines(edges1, screen, color)
     edges = []
     edges1 = []
+
+save_extension(screen, 'pic.png')
 display(screen)
 
 
